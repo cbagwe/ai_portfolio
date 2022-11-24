@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Sem%205/AI_Portfolio/mlruns/0/0293c03e3f004fe886c8012d4d742184/artifacts
+end_time: 1668712125421
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0293c03e3f004fe886c8012d4d742184
+run_name: svm_exp1
+run_uuid: 0293c03e3f004fe886c8012d4d742184
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668712125269
+status: 3
+tags: []
+user_id: Chaitali Bagwe
