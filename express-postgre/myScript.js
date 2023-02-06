@@ -2,10 +2,10 @@ readTodos();
 async function readTodos() {
 
     try{
-        const companies_table = document.getElementById("companies_table")
-        while(companies_table.firstChild) companies_table.removeChild(companies_table.firstChild)
+        const companies_table = document.getElementById("companies_table");
+        while(companies_table.firstChild) companies_table.removeChild(companies_table.firstChild);
 
-        const result = await fetch("http://localhost:8080/prodCreation", {method:"GET"})
+        const result = await fetch("http://localhost:8080/prodCreation", {method:"GET"});
         const companies = await result.json();
 
         // create elements <table> and a <tbody>
@@ -59,7 +59,7 @@ async function readTodos() {
         companies_table.appendChild(tblBody);
     }
     catch (e) {
-        console.log("Error reading the companies.")
+        console.log("Error reading the companies.");
     }
 
 }

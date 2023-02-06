@@ -20,7 +20,9 @@ const pool = new Pool({
 
  
 app.get("/", (req, res) => res.sendFile(`${__dirname}/index.html`))
+app.get("/myStyle.css", (req, res) => res.sendFile(`${__dirname}/myStyle.css`))
 app.get("/myScript.js", (req, res) => res.sendFile(`${__dirname}/myScript.js`))
+app.get("/aiLandscape.js", (req, res) => res.sendFile(`${__dirname}/aiLandscape.js`))
 
 app.get("/prodCreation", async (req, res) => {
     const rows = await readProdCreationCompanies();

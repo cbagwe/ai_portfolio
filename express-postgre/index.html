@@ -4,57 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="myStyle.css">
+    <title>AI Companies in Product Creation</title>
 </head>
-
-<style>
-    .styled-table {
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 400px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .styled-table tr th{
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-    }
-
-    .styled-table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
-
-    .styled-table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
-
-    .styled-table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
-    }
-
-    .styled-table tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-    }
-
-    h1 {
-        padding-left: 455px;
-        background-color: aquamarine;
-    }
-</style>
 
 <body>
     <h1>AI COMPANIES IN PRODUCT CREATION</h1>
 
     <table id = 'companies_table' style="width:100%" class="styled-table"></table>
-
     <script src="myScript.js"></script>
+
+    <div class="landscape">
+        <div class="landscape-item" id="cycle-div">
+            <h3>Strategic Product Planning</h3>
+            <div class="landscape-item">
+                <h3 id="idea-generation">Idea Generation</h3>
+            </div>
+            <div class="landscape-item">
+                <h3 id="customer-market-analysis">Customer Market Analysis</h3>
+            </div>
+            <div class="landscape-item">
+                <h3 id="product-management">Product Management</h3>
+            </div>
+        </div>
+        
+        <div class="landscape-item" id="cycle-div">
+            <h3>Product Development</h3>
+            <div class="landscape-item">
+                <h3 id="testing">Testing</h3>
+            </div>
+            <div class="landscape-item">
+                <h3 id="requirements-management">Requirements Management</h3>
+            </div>
+            <div class="landscape-item">
+                <h3 id="product-design">Product Design</h3>
+            </div>
+        </div>
+
+        <div class="landscape-item" id="cycle-div">
+            <h3>Production System Development</h3>
+            <div class="landscape-item">
+                <h3 id="process-optimization">Process Optimization</h3>
+            </div>
+            <div class="landscape-item">
+                <h3 id="maintenance">Maintenance</h3>
+            </div>
+        </div>
+    </div>
+    <script src="aiLandscape.js"></script>
+
+    <!--<div id = "companies-div" style = "width: 100%;" class="companies-div"></div>
+    <script src="aiLandscape.js"></script>-->
 </body>
 </html>
