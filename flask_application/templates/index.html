@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment Tutorial 1</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body style="background: #000;">
+    <input type = "button" class="button" value="Predict with URL" name="predict_div" onclick="showPredictionForm()"/>
+    <input type = "button" class="button" value="Add data to Database" name="add_div" onclick="showAddForm()"/>
+    <script>
+
+        function showPredictionForm() {
+            document.getElementById('prediction_div').style.display = "block";
+            document.getElementById('add_div').style.display = "none";
+        }
+        
+        function showAddForm() {
+            document.getElementById('prediction_div').style.display = "none";
+            document.getElementById('add_div').style.display = "block";
+        }
+    </script>
+
+    <div class="forms" id="prediction_div" {{show_predict}}>
+        <h1>Prediction for an AI company</h1>
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict')}}"method="post">
+            <input type="text" name="url" placeholder="Enter the URL" required="required" value="{{input_url}}"/>
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict for this AI company</button>
+        </form>
+
+    <br>
+    <br>
+    {{ prediction_text }}
+    </div>
+    <div class="forms" id="add_div" {{show_addData}}>
+        <h1> Add data to Database</h1>
+
+        <form action="{{url_for('addData')}}" method="post">
+            <input type="text" name="name" placeholder="Enter the Company Name" required="required" />
+            <input type="text" name="product" placeholder="Enter the Product Name" required="required" />
+            <input type="text" name="cluster" placeholder="Enter the Main Cluster" required="required" />
+            <input type="text" name="sub-cluster" placeholder="Enter the Sub Cluster" required="required" />
+            <input type="text" name="company_url" placeholder="Enter the link to the Website" required="required" />
+            <button type="submit" class="btn btn-primary btn-block btn-large">Add to Database</button>
+        </form>
+        <br>
+        <br>
+        {{ creation_text }}
+    </div>
+
+
+</body>
+</html>
