@@ -14,11 +14,18 @@ from data_processing import read_url_content
 from data_extraction import extract_keywords
 from similarity_matching import find_clusters_for_individual_company
 
+LOCALHOST = "127.0.0.1"
+PORT = 5432
+USERNAME = "postgres"
+PASSWORD = "Chaitali@28"
+DB_NAME = "postgres"
+
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 model = pickle.load(open('..\\pickle_files\\finalized_model.sav', 'rb'))
 vectorizer = pickle.load(open('..\\pickle_files\\vectorizer.sav', 'rb'))
 
+# Function for the homepage
 @app.route('/')
 def home():
     #messages = request.args['messages']  # counterpart for url_for()
@@ -39,6 +46,7 @@ def home():
     else:
         return render_template('index.html')
 
+# Function when the button "Predict for this AI company" is clicked
 @app.route('/predict',methods=['POST'])
 def predict():
 
@@ -77,15 +85,16 @@ def predict():
     
     return redirect(url_for('home', messages = messages))
 
-
+# Function to connect to the database
 def get_db_connection():#TODO: Remove hardcoded connection strings
-    conn = psycopg2.connect(host="127.0.0.1",
-                            database='postgres',
-                            user="postgres",
-                            port= 5432,
-                            password='Chaitali@28')
+    conn = psycopg2.connect(host=LOCALHOST,
+                            database=DB_NAME,
+                            user=USERNAME,
+                            port=PORT,
+                            password=PASSWORD)
     return conn
 
+# Function when the button "Add to Database" is clicked
 @app.route('/addData', methods=['GET', 'POST'])
 def addData():
     name = request.form['name']
@@ -94,20 +103,34 @@ def addData():
     sub_cluster = request.form['sub-cluster']
     link = request.form['company_url']
 
+    duplicate_key = False # Used for tracking duplicate key
+
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO PRODCREATION_COMPANIES(COMPANY_NAME,PRODUCT,COMPANY_CLUSTER,COMPANY_SUBCLUSTER,COMPANY_LINK)"
+    try:
+        cur.execute("INSERT INTO PRODCREATION_COMPANIES(COMPANY_NAME,PRODUCT,COMPANY_CLUSTER,COMPANY_SUBCLUSTER,COMPANY_LINK)"
                 "VALUES(%s, %s, %s, %s, %s)",
                 (name, product, cluster, sub_cluster, link))
+    except psycopg2.errors.UniqueViolation as duplicate_error: # Handles unique key exception
+        print(duplicate_error)
+        duplicate_key = True
     conn.commit()
     cur.close()
     conn.close()
 
     print("Company {} added successfully".format(name))
 
+    # Messages to be displayed when "Add to Database" is clicked
+    if duplicate_key == True:
+        creation_message = "The company with this product already exists in the Database"
+    elif (product == ""):
+        creation_message = "Successfully added the Company {} to Database".format(name)
+    else:
+        creation_message = "Successfully added the Company {} with Product {} to Database".format(name, product)
+
     messages = json.dumps({
         "addData": True,
-        "creation_text": "Successfully added the Company {} with Product {} to Database".format(name, product),
+        "creation_text": creation_message,
         "show_addData": "style=display:block;"
         })
     
@@ -116,5 +139,6 @@ def addData():
     return redirect(url_for('home', messages = messages)) 
     #render_template('index.html', creation_text = "Successfully added the Company {} with Product {} to Database".format(name, product), show_addData="style=visibility:visible;")
 
+# Main function defining the port at which the app should run
 if __name__ == "__main__":
     app.run(debug=True, port=7000)

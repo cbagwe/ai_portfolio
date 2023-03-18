@@ -51,6 +51,9 @@ def create_wordcloud(long_string):
     # Visualize the word cloud
     return wordcloud.to_image()
 
+#### 4) Perform feature extraction on the data inside the passed dataframe according to the method specified
+#### Input: Dataframe, Method to be used
+#### Output: Nothing. The extracted features are stored in the same dataframe under the column method_name
 def extraction_on_cleaned_webdata(dataframe, method):
     if method == "keywords":
         dataframe["Keywords"] = dataframe["WebData"].apply(extract_keywords)

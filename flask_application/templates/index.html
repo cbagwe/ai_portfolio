@@ -43,13 +43,14 @@
         <h1> Add data to Database</h1>
 
         <form action="{{url_for('addData')}}" method="post">
-            <input type="text" name="name" placeholder="Enter the Company Name" required="required" />
-            <input type="text" name="product" placeholder="Enter the Product Name" required="required" />
-            <input type="text" name="cluster" placeholder="Enter the Main Cluster" required="required" />
-            <input type="text" name="sub-cluster" placeholder="Enter the Sub Cluster" required="required" />
-            <input type="text" name="company_url" placeholder="Enter the link to the Website" required="required" />
+            <input type="text" name="name" placeholder="Enter the Company Name*" required="required" />
+            <input type="text" name="product" placeholder="Enter the Product Name"/>
+            <input type="text" name="cluster" placeholder="Enter the Main Cluster*" required="required" />
+            <input type="text" name="sub-cluster" placeholder="Enter the Sub Cluster*" required="required" />
+            <input type="text" name="company_url" placeholder="Enter the link to the Website*" required="required" />
             <button type="submit" class="btn btn-primary btn-block btn-large">Add to Database</button>
         </form>
+        <p id="mandatory_mark">*Mandatory fields</p>
         <br>
         <br>
         {{ creation_text }}
