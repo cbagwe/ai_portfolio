@@ -266,8 +266,6 @@ python-dotenv==0.21.0
 python-json-logger==2.0.4
 pytz==2021.1
 PyWavelets==1.4.1
-pywin32==304
-pywinpty==0.5.7
 PyYAML==6.0
 pyzmq==22.0.3
 qtconsole==5.3.2
