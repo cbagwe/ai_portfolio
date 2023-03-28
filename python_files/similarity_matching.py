@@ -1,5 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
+from pathlib import Path
 import pickle
 
 # Store the labels for main clusters and sub clusters inside 
@@ -11,22 +12,43 @@ sub_cluster3 = ["Production System Planning", "Production System Implementation"
 # We used the hugging face's sentence transformer for embedding
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
+# Create path to the pickle_files directory with pathlib library so that it is accessible through all OS
+pickle_folder = Path("../pickle_files")
+
+# Files to be open in pickle_files directory
+
+spp_file = pickle_folder / "spp_embeddings.sav"
+pd_file =  pickle_folder / "pd_embeddings.sav"
+psd_file =  pickle_folder / "psd_embeddings.sav"
+
+ig_file =  pickle_folder / "idea_generation_embeddings.sav"
+ma_file =  pickle_folder / "market_analysis_embeddings.sav"
+ta_file =  pickle_folder / "technology_analysis_embeddings.sav"
+pm_file =  pickle_folder / "product_management_embeddings.sav"
+
+te_file =  pickle_folder / "testing_embeddings.sav"
+pde_file =  pickle_folder / "product_design_embeddings.sav"
+rm_file =  pickle_folder / "requirements_management_embeddings.sav"
+
+psp_file =  pickle_folder / "production_system_planning_embeddings.sav"
+psi_file =  pickle_folder / "production_system_implementation_embeddings.sav"
+
 # We load the embeddings of main clusters and sub-clusters using the pickle Python module
-pickled_spp_embeddings = pickle.load(open('..\\pickle_files\\spp_embeddings.sav', 'rb'))
-pickled_pd_embeddings = pickle.load(open('..\\pickle_files\\pd_embeddings.sav', 'rb'))
-pickled_psd_embeddings = pickle.load(open('..\\pickle_files\\psd_embeddings.sav', 'rb'))
+pickled_spp_embeddings = pickle.load(open(spp_file, 'rb'))
+pickled_pd_embeddings = pickle.load(open(pd_file, 'rb'))
+pickled_psd_embeddings = pickle.load(open(psd_file, 'rb'))
 
-idea_generation_embeddings = pickle.load(open('..\\pickle_files\\idea_generation_embeddings.sav', 'rb'))
-market_analysis_embeddings = pickle.load(open('..\\pickle_files\\market_analysis_embeddings.sav', 'rb'))
-technology_analysis_embeddings = pickle.load(open('..\\pickle_files\\technology_analysis_embeddings.sav', 'rb'))
-product_manangement_embeddings = pickle.load(open('..\\pickle_files\\product_management_embeddings.sav', 'rb'))
+idea_generation_embeddings = pickle.load(open(ig_file, 'rb'))
+market_analysis_embeddings = pickle.load(open(ma_file, 'rb'))
+technology_analysis_embeddings = pickle.load(open(ta_file, 'rb'))
+product_manangement_embeddings = pickle.load(open(pm_file, 'rb'))
 
-testing_embeddings = pickle.load(open('..\\pickle_files\\testing_embeddings.sav', 'rb'))
-product_design_embeddings = pickle.load(open('..\\pickle_files\\product_design_embeddings.sav', 'rb'))
-requirements_management_embeddings = pickle.load(open('..\\pickle_files\\requirements_management_embeddings.sav', 'rb'))
+testing_embeddings = pickle.load(open(te_file, 'rb'))
+product_design_embeddings = pickle.load(open(pde_file, 'rb'))
+requirements_management_embeddings = pickle.load(open(rm_file, 'rb'))
 
-production_system_planning_embeddings = pickle.load(open('..\\pickle_files\\production_system_planning_embeddings.sav', 'rb'))
-production_system_implementation_embeddings = pickle.load(open('..\\pickle_files\\production_system_implementation_embeddings.sav', 'rb'))
+production_system_planning_embeddings = pickle.load(open(psp_file, 'rb'))
+production_system_implementation_embeddings = pickle.load(open(psi_file, 'rb'))
 
 # Function to find cosine similarity scores between two vectors
 def find_cosine_sim(vector1,vector2):
