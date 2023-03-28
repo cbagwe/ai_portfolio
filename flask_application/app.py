@@ -6,6 +6,8 @@ import requests
 import sys
 import psycopg2
 
+from pathlib import Path
+
 sys.path.insert(0, '../python_files/')
 
 from flask import Flask, session, request, render_template, redirect, url_for
@@ -14,16 +16,24 @@ from data_processing import read_url_content
 from data_extraction import extract_keywords
 from similarity_matching import find_clusters_for_individual_company
 
+#define global variables to be used throughout the code
 LOCALHOST = "127.0.0.1"
 PORT = 5432
 USERNAME = "postgres"
 PASSWORD = "Chaitali@28"
 DB_NAME = "postgres"
 
+# Create path to the pickle_files directory with pathlib library so that it is accessible through all OS
+pickle_folder = Path("../pickle_files")
+
+# Files to be open in pickle_files directory
+model_file = pickle_folder / "finalized_model.sav"
+vectorizer_file = pickle_folder / "vectorizer.sav"
+
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
-model = pickle.load(open('..\\pickle_files\\finalized_model.sav', 'rb'))
-vectorizer = pickle.load(open('..\\pickle_files\\vectorizer.sav', 'rb'))
+model = pickle.load(open(model_file, 'rb'))
+vectorizer = pickle.load(open(vectorizer_file, 'rb'))
 
 # Function for the homepage
 @app.route('/')
