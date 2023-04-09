@@ -17,11 +17,11 @@ from data_extraction import extract_keywords
 from similarity_matching import find_clusters_for_individual_company
 
 #define global variables to be used throughout the code
-LOCALHOST = "0.0.0.0"
+LOCALHOST = "127.0.0.1"
 PORT = 5432
-USERNAME = "prod_companies"
-PASSWORD = "ai_marketplace"
-DB_NAME = "prod_companies"
+USERNAME = "postgres"
+PASSWORD = "postgres"
+DB_NAME = "postgres"
 
 # Create path to the pickle_files directory with pathlib library so that it is accessible through all OS
 pickle_folder = Path("../pickle_files")
@@ -73,6 +73,8 @@ def predict():
         webdata = ""
     
     keywords = extract_keywords(webdata)
+    print(keywords)
+    app.logger.info(keywords)
 
     test_company_input = vectorizer.transform([keywords]).toarray().tolist()
     prediction = model.predict(test_company_input)
@@ -122,6 +124,8 @@ def addData():
                 "VALUES(%s, %s, %s, %s, %s)",
                 (name, product, cluster, sub_cluster, link))
     except psycopg2.errors.UniqueViolation as duplicate_error: # Handles unique key exception
+        app.logger.info(duplicate_error)
+        app.logger.info(name + ' ' + product)
         print(duplicate_error)
         duplicate_key = True
     conn.commit()
