@@ -17,11 +17,11 @@ from data_extraction import extract_keywords
 from similarity_matching import find_clusters_for_individual_company
 
 #define global variables to be used throughout the code
-LOCALHOST = "127.0.0.1"
+LOCALHOST = "0.0.0.0"
 PORT = 5432
-USERNAME = "postgres"
-PASSWORD = "Chaitali@28"
-DB_NAME = "postgres"
+USERNAME = "prod_companies"
+PASSWORD = "ai_marketplace"
+DB_NAME = "prod_companies"
 
 # Create path to the pickle_files directory with pathlib library so that it is accessible through all OS
 pickle_folder = Path("../pickle_files")
