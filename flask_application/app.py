@@ -68,11 +68,13 @@ def predict():
         page = requests.get(URL, headers = headers)
         # append the URL content to the list
         webdata = read_url_content(page)
+        print(webdata)
     except(ConnectionError, Exception):
         # for websites not accessible append empty string to the list
         webdata = ""
     
     keywords = extract_keywords(webdata)
+
     print(keywords)
     app.logger.info(keywords)
 
