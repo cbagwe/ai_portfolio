@@ -80,6 +80,7 @@ def predict():
         webdata = read_url_content(page)
     except(ConnectionError, Exception):
         # for websites not accessible append empty string to the list
+        print("Not able to retrieve webdata")
         webdata = ""
     
     keywords = extract_keywords(webdata)
