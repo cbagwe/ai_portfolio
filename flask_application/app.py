@@ -1,6 +1,4 @@
 import json
-import numpy as np
-import pandas as pd
 import pickle
 import requests
 import sys
@@ -78,9 +76,11 @@ def predict():
         page = requests.get(URL, headers = headers)
         # append the URL content to the list
         webdata = read_url_content(page)
-    except(ConnectionError, Exception):
-        # for websites not accessible append empty string to the list
+    except(ConnectionError, Exception) as e:
+        # Print the exception in the terminal
+        print(e)
         print("Not able to retrieve webdata")
+        # for websites not accessible append empty string to the list
         webdata = ""
     
     keywords = extract_keywords(webdata)
