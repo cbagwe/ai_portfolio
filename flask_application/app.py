@@ -35,6 +35,16 @@ app.secret_key = "super_secret_key"
 model = pickle.load(open(model_file, 'rb'))
 vectorizer = pickle.load(open(vectorizer_file, 'rb'))
 
+if model is None:
+    print("Model not retrieved")
+else:
+    print("Model retrieved")
+
+if vectorizer is None:
+    print("Vectorizer not retrieved")
+else:
+    print("Vectorizer retrieved")
+
 # Function for the homepage
 @app.route('/')
 def home():
@@ -68,15 +78,11 @@ def predict():
         page = requests.get(URL, headers = headers)
         # append the URL content to the list
         webdata = read_url_content(page)
-        print(webdata)
     except(ConnectionError, Exception):
         # for websites not accessible append empty string to the list
         webdata = ""
     
     keywords = extract_keywords(webdata)
-
-    print(keywords)
-    app.logger.info(keywords)
 
     test_company_input = vectorizer.transform([keywords]).toarray().tolist()
     prediction = model.predict(test_company_input)
